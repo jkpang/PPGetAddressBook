@@ -5,13 +5,13 @@
 * 支持获取原始顺序的联系人,未分组,可自行处理.
 ##Usage 使用方法
 
-###首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
+###一、首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
 
 ```objc
      //请求用户获取通讯录权限
     [PPGetAddressBook requestAddressBookAuthorization];
 ```
-###获取通讯录
+###二、获取通讯录
 ###1.获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理),一句话搞定!
 
 ```objc
