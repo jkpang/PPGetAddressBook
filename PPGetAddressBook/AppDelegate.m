@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 #import "PPGetAddressBook.h"
 
 @interface AppDelegate ()
@@ -18,7 +19,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [PPGetAddressBook PPAddressBookRequestAccessWithCompletion];
+    
+    //请求用户获取通讯录权限
+    [PPGetAddressBook requestAddressBookAuthorization];
+    
+    ViewController *mainVC = [ViewController new];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    self.window.rootViewController = navi;
+    
     return YES;
 }
 

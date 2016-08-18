@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2291AAB41D65EE4A007A923C /* AddressBookController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2291AAB21D65EE4A007A923C /* AddressBookController1.m */; };
+		2291AAB51D65EE4A007A923C /* AddressBookController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2291AAB31D65EE4A007A923C /* AddressBookController1.xib */; };
+		2291AAB91D65EE57007A923C /* AddressBookController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2291AAB71D65EE57007A923C /* AddressBookController2.m */; };
+		2291AABA1D65EE57007A923C /* AddressBookController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2291AAB81D65EE57007A923C /* AddressBookController2.xib */; };
 		22BEDC131D64ADD900A72128 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDC121D64ADD900A72128 /* main.m */; };
 		22BEDC161D64ADD900A72128 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDC151D64ADD900A72128 /* AppDelegate.m */; };
 		22BEDC191D64ADD900A72128 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDC181D64ADD900A72128 /* ViewController.m */; };
-		22BEDC1C1D64ADD900A72128 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BEDC1A1D64ADD900A72128 /* Main.storyboard */; };
 		22BEDC1E1D64ADD900A72128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEDC1D1D64ADD900A72128 /* Assets.xcassets */; };
 		22BEDC211D64ADD900A72128 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BEDC1F1D64ADD900A72128 /* LaunchScreen.storyboard */; };
 		22BEDC2C1D64ADD900A72128 /* PPGetAddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDC2B1D64ADD900A72128 /* PPGetAddressBookTests.m */; };
@@ -31,13 +34,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2291AAB11D65EE4A007A923C /* AddressBookController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookController1.h; sourceTree = "<group>"; };
+		2291AAB21D65EE4A007A923C /* AddressBookController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookController1.m; sourceTree = "<group>"; };
+		2291AAB31D65EE4A007A923C /* AddressBookController1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressBookController1.xib; sourceTree = "<group>"; };
+		2291AAB61D65EE57007A923C /* AddressBookController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookController2.h; sourceTree = "<group>"; };
+		2291AAB71D65EE57007A923C /* AddressBookController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookController2.m; sourceTree = "<group>"; };
+		2291AAB81D65EE57007A923C /* AddressBookController2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressBookController2.xib; sourceTree = "<group>"; };
 		22BEDC0E1D64ADD900A72128 /* PPGetAddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPGetAddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEDC121D64ADD900A72128 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22BEDC141D64ADD900A72128 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22BEDC151D64ADD900A72128 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		22BEDC171D64ADD900A72128 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		22BEDC181D64ADD900A72128 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		22BEDC1B1D64ADD900A72128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22BEDC1D1D64ADD900A72128 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BEDC201D64ADD900A72128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22BEDC221D64ADD900A72128 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +79,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2291AAAF1D65EE0A007A923C /* 原始顺序 */ = {
+			isa = PBXGroup;
+			children = (
+				2291AAB61D65EE57007A923C /* AddressBookController2.h */,
+				2291AAB71D65EE57007A923C /* AddressBookController2.m */,
+				2291AAB81D65EE57007A923C /* AddressBookController2.xib */,
+			);
+			name = "原始顺序";
+			sourceTree = "<group>";
+		};
+		2291AAB01D65EE27007A923C /* A~Z顺序排列 */ = {
+			isa = PBXGroup;
+			children = (
+				2291AAB11D65EE4A007A923C /* AddressBookController1.h */,
+				2291AAB21D65EE4A007A923C /* AddressBookController1.m */,
+				2291AAB31D65EE4A007A923C /* AddressBookController1.xib */,
+			);
+			name = "A~Z顺序排列";
+			sourceTree = "<group>";
+		};
 		22BEDC051D64ADD900A72128 = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +125,8 @@
 				22BEDC151D64ADD900A72128 /* AppDelegate.m */,
 				22BEDC171D64ADD900A72128 /* ViewController.h */,
 				22BEDC181D64ADD900A72128 /* ViewController.m */,
-				22BEDC1A1D64ADD900A72128 /* Main.storyboard */,
-				22BEDC1D1D64ADD900A72128 /* Assets.xcassets */,
-				22BEDC1F1D64ADD900A72128 /* LaunchScreen.storyboard */,
-				22BEDC221D64ADD900A72128 /* Info.plist */,
-				22BEDC401D64AE2600A72128 /* defult.png */,
+				2291AAB01D65EE27007A923C /* A~Z顺序排列 */,
+				2291AAAF1D65EE0A007A923C /* 原始顺序 */,
 				22BEDC111D64ADD900A72128 /* Supporting Files */,
 			);
 			path = PPGetAddressBook;
@@ -110,6 +135,10 @@
 		22BEDC111D64ADD900A72128 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				22BEDC1D1D64ADD900A72128 /* Assets.xcassets */,
+				22BEDC1F1D64ADD900A72128 /* LaunchScreen.storyboard */,
+				22BEDC221D64ADD900A72128 /* Info.plist */,
+				22BEDC401D64AE2600A72128 /* defult.png */,
 				22BEDC121D64ADD900A72128 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -219,9 +248,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BEDC211D64ADD900A72128 /* LaunchScreen.storyboard in Resources */,
+				2291AAB51D65EE4A007A923C /* AddressBookController1.xib in Resources */,
 				22BEDC411D64AE2600A72128 /* defult.png in Resources */,
+				2291AABA1D65EE57007A923C /* AddressBookController2.xib in Resources */,
 				22BEDC1E1D64ADD900A72128 /* Assets.xcassets in Resources */,
-				22BEDC1C1D64ADD900A72128 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,9 +271,11 @@
 			files = (
 				22BEDC3F1D64AE0E00A72128 /* PPPersonModel.m in Sources */,
 				22BEDC191D64ADD900A72128 /* ViewController.m in Sources */,
+				2291AAB91D65EE57007A923C /* AddressBookController2.m in Sources */,
 				22BEDC161D64ADD900A72128 /* AppDelegate.m in Sources */,
 				22BEDC131D64ADD900A72128 /* main.m in Sources */,
 				22BEDC3D1D64AE0E00A72128 /* PPAddressBookHandle.m in Sources */,
+				2291AAB41D65EE4A007A923C /* AddressBookController1.m in Sources */,
 				22BEDC3E1D64AE0E00A72128 /* PPGetAddressBook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,14 +299,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		22BEDC1A1D64ADD900A72128 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22BEDC1B1D64ADD900A72128 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		22BEDC1F1D64ADD900A72128 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -443,6 +467,7 @@
 				22BEDC321D64ADD900A72128 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22BEDC331D64ADD900A72128 /* Build configuration list for PBXNativeTarget "PPGetAddressBookTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +476,7 @@
 				22BEDC351D64ADD900A72128 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

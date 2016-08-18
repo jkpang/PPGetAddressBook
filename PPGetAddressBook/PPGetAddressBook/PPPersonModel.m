@@ -10,13 +10,13 @@
 
 @implementation PPPersonModel
 
-- (instancetype)init
+- (NSMutableArray *)mobile
 {
-    if(self = [super init])
+    if(!_mobile)
     {
         _mobile = [NSMutableArray array];
     }
-    return self;
+    return _mobile;
 }
 
 @end

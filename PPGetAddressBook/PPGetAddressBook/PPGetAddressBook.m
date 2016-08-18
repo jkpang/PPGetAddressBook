@@ -8,7 +8,8 @@
 
 #import "PPGetAddressBook.h"
 #import "PPAddressBookHandle.h"
-
+#define START NSDate *startTime = [NSDate date]
+#define END NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
 @implementation PPGetAddressBook
 
 
@@ -59,6 +60,7 @@
 {
     NSMutableDictionary *addressBookDict = [NSMutableDictionary dictionary];
     
+#warning 经过测试,这一段比较耗时,如果有好的方法欢迎指教 ================================
     [PPAddressBookHandle getAddressBookDataSource:^(PPPersonModel *model) {
         
         //获取到姓名的大写首字母
@@ -77,19 +79,22 @@
             //将首字母-姓名数组作为key-value加入到字典中
             [addressBookDict setObject:arrGroupNames forKey:firstLetterString];
         }
-
+        
     }];
+#warning 经过测试,这一段比较耗时,如果有好的方法欢迎指教 ================================
     
     // 重新对所有大写字母Key值里面对应的的联系人数组进行排序
     //1.遍历联系人字典中所有的元素
-    [addressBookDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, NSMutableArray * _Nonnull keyPeopleArray, BOOL * _Nonnull stop) {
-        
+    //利用到多核cpu的优势:参考:http://blog.sunnyxx.com/2014/04/30/ios_iterator/
+    [addressBookDict enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull key, NSMutableArray * _Nonnull keyPeopleArray, BOOL * _Nonnull stop) {
         //2.对每个Key值对应的数组里的元素来排序
         [keyPeopleArray sortUsingComparator:^NSComparisonResult(PPPersonModel*  _Nonnull obj1, PPPersonModel  *_Nonnull obj2) {
             
             return [obj1.name localizedCompare:obj2.name];
         }];
+
     }];
+    
     // 将addressBookDict字典中的所有Key值进行排序: A~Z
     NSArray *peopleNameKey = [[addressBookDict allKeys] sortedArrayUsingSelector:@selector(compare:)];
     
