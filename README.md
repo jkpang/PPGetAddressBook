@@ -3,6 +3,9 @@
 
 * 支持获取按联系人姓名首字拼音A~Z排序(*重点:已经对姓名的第二个字做了处理,排序更准确!*);
 * 支持获取原始顺序的联系人,未分组,可自行处理.
+
+![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
+
 ##Usage 使用方法
 
 ###一、首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
