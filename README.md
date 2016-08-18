@@ -8,7 +8,7 @@
 ###首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
 
 ```objc
-    //请求用户获取通讯录权限
+     //请求用户获取通讯录权限
     [PPGetAddressBook requestAddressBookAuthorization];
 ```
 ###获取通讯录
