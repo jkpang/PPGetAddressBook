@@ -8,7 +8,7 @@
 ###首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
 
 ```objc
-//请求用户获取通讯录权限
+    //请求用户获取通讯录权限
     [PPGetAddressBook requestAddressBookAuthorization];
 ```
 ###获取通讯录
@@ -30,22 +30,7 @@
         [self.dataSource addObject:model];
     }];
 ```
-###排序的实现
-对姓名第二个字的排序处理其实很简单,直接调用系统的对数组内元素的排序方法: - (void)sortUsingComparator:(NSComparator)cmptr就能实现
 
-```objc
-// 重新对所有大写字母Key值里面对应的的联系人数组进行排序
-    //1.遍历联系人字典中所有的元素
-    //利用到多核cpu的优势:参考:http://blog.sunnyxx.com/2014/04/30/ios_iterator/
-    [addressBookDict enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull key, NSMutableArray * _Nonnull keyPeopleArray, BOOL * _Nonnull stop) {
-        //2.对每个Key值对应的数组里的元素来排序
-        [keyPeopleArray sortUsingComparator:^NSComparisonResult(PPPersonModel*  _Nonnull obj1, PPPersonModel  *_Nonnull obj2) {
-            
-            return [obj1.name localizedCompare:obj2.name];
-        }];
-
-    }];
-```
 此封装里面还有些不太完美的地方,如果你有更好的实现方法,希望不吝赐教!
 ##联系方式:
 * Weibo : @CoderPang
