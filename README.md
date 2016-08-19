@@ -4,7 +4,7 @@
 * 支持获取按联系人姓名首字拼音A~Z排序(*重点:已经对姓名的第二个字做了处理,排序更准确!*);
 * 支持获取原始顺序的联系人,未分组,可自行处理.
 
-![codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
+[codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
 
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
 
