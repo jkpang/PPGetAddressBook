@@ -7,7 +7,11 @@
 [codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
 
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
-
+##Installation 安装
+###1.手动安装:
+`下载DEMO后,将子文件夹PPGetAddressBook拖入到项目中, 导入头文件PPGetAddressBook.h开始使用`
+###2.CocoaPods安装:
+`pod 'PPGetAddressBook' --> pod install或者pod install --no-repo-update`
 ##Usage 使用方法
 
 ###一、首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
