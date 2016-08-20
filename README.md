@@ -41,6 +41,8 @@
 * Weibo : @CoderPang
 * Email : jkpang@outlook.com
 * QQ : 2406552315
+##许可证
+PPGetAddressBook 使用 MIT 许可证，详情见 LICENSE 文件。
 
 
 
