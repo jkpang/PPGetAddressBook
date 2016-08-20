@@ -37,10 +37,12 @@
 ```
 
 此封装里面还有些不太完美的地方,如果你有更好的实现方法,希望不吝赐教!
+
 ##联系方式:
 * Weibo : @CoderPang
 * Email : jkpang@outlook.com
 * QQ : 2406552315
+
 ##许可证
 PPGetAddressBook 使用 MIT 许可证，详情见 LICENSE 文件。
 
