@@ -59,12 +59,12 @@
         NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
         NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
         
+        NSString *name = [NSString stringWithFormat:@"%@%@",lastName?lastName:@"",firstName?firstName:@""];
+        model.name = name.length > 0 ? name : @"无名氏" ;
+        
         // 5.3获取头像数据
         NSData *imageData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail);
         model.headerImage = [UIImage imageWithData:imageData];
-        
-        NSString *name = [NSString stringWithFormat:@"%@%@",lastName?lastName:@"",firstName?firstName:@""];
-        model.name = name ? name : @"无名氏" ;
         
         // 5.4获取每个人所有的电话号码
         ABMultiValueRef phones = ABRecordCopyValue(person, kABPersonPhoneProperty);
@@ -129,7 +129,7 @@
         // 创建联系人模型
         PPPersonModel *model = [PPPersonModel new];
         NSString *name = [NSString stringWithFormat:@"%@%@",lastName?lastName:@"",firstName?firstName:@""];
-        model.name = name ? name : @"无名氏" ;
+        model.name = name.length > 0 ? name : @"无名氏" ;
         
         // 联系人头像
         model.headerImage = [UIImage imageWithData:contact.thumbnailImageData];
