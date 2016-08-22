@@ -10,34 +10,29 @@
 
 @implementation PPAddressBookHandle
 
-+ (void)getAddressBookDataSource:(PPPersonModelBlock)personModel
++ (void)getAddressBookDataSource:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
     if(IOS9_LATER)
     {
-        [self getDataSourceFrom_IOS9_Later:personModel];
+        [self getDataSourceFrom_IOS9_Later:personModel authorizationFailure:failure];
     }
     else
     {
-        [self getDataSourceFrom_IOS9_Ago:personModel];
+        [self getDataSourceFrom_IOS9_Ago:personModel authorizationFailure:failure];
     }
 
 }
 
 #pragma mark - IOS9之前获取通讯录的方法
-+ (void)getDataSourceFrom_IOS9_Ago:(PPPersonModelBlock)personModel
++ (void)getDataSourceFrom_IOS9_Ago:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
     // 1.获取授权状态
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
     
-    // 2.如果没有授权,直接return
+    // 2.如果没有授权,先执行授权失败的block后return
     if (status != kABAuthorizationStatusAuthorized/** 已经授权*/)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"知道了"
-                                              otherButtonTitles:nil];
-        [alert show];
+        failure ? failure() : nil;
         return;
     }
     
@@ -92,20 +87,15 @@
 }
 
 #pragma mark - IOS9之后获取通讯录的方法
-+ (void)getDataSourceFrom_IOS9_Later:(PPPersonModelBlock)personModel
++ (void)getDataSourceFrom_IOS9_Later:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
 #ifdef __IPHONE_9_0
     // 1.获取授权状态
     CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
-    // 2.如果没有授权,直接return
+    // 2.如果没有授权,先执行授权失败的block后return
     if (status != CNAuthorizationStatusAuthorized)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"知道了"
-                                              otherButtonTitles:nil];
-        [alert show];
+        failure ? failure() : nil;
         return;
     };
     

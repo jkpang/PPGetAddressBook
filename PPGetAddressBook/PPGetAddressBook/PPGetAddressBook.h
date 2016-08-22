@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PPAddressBookHandle.h"
 #import "PPPersonModel.h"
 
 /**
@@ -27,8 +28,11 @@ typedef void(^AddressBookInfoBlock)(NSDictionary<NSString *,NSArray *> *addressB
 
 /**
  *  获取所有联系人信息
+ *
+ *  @param addressBookInfo 装着所有联系人信息的字典
+ *  @param failure         授权失败的Block
  */
-+ (void)getAddressBook:(AddressBookInfoBlock)addressBookInfo;
++ (void)getAddressBook:(AddressBookInfoBlock)addressBookInfo authorizationFailure:(AuthorizationFailure)failure;
 
 
 @end

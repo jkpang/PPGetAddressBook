@@ -29,6 +29,15 @@
         self.contactPeopleDict = addressBookDict;
         //联系人分组按拼音分组的Key值
         self.keys = peopleNameKey;
+        
+    } authorizationFailure:^{
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"知道了"
+                                              otherButtonTitles:nil];
+        [alert show];
     }];
 
     self.tableView.rowHeight = 60;

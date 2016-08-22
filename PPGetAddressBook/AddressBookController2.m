@@ -26,7 +26,16 @@
     
     //获取没有经过排序的联系人模型
     [PPAddressBookHandle getAddressBookDataSource:^(PPPersonModel *model) {
+        
         [_dataSource addObject:model];
+        
+    } authorizationFailure:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"知道了"
+                                              otherButtonTitles:nil];
+        [alert show];
     }];
     
     self.tableView.rowHeight = 60;

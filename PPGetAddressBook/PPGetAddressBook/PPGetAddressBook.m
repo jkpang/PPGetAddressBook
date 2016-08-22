@@ -7,7 +7,6 @@
 //
 
 #import "PPGetAddressBook.h"
-#import "PPAddressBookHandle.h"
 #define START NSDate *startTime = [NSDate date]
 #define END NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
 @implementation PPGetAddressBook
@@ -56,7 +55,7 @@
 }
 
 #pragma mark - 获取所有联系人信息
-+ (void)getAddressBook:(AddressBookInfoBlock)addressBookInfo
++ (void)getAddressBook:(AddressBookInfoBlock)addressBookInfo authorizationFailure:(AuthorizationFailure)failure
 {
     NSMutableDictionary *addressBookDict = [NSMutableDictionary dictionary];
     
@@ -80,6 +79,8 @@
             [addressBookDict setObject:arrGroupNames forKey:firstLetterString];
         }
         
+    } authorizationFailure:^{
+        failure ? failure() : nil;
     }];
 //***************** 经过测试,这一段比较耗时,如果有好的方法欢迎指教 **********************//
     
