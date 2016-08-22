@@ -14,6 +14,7 @@
 ###2.CocoaPods安装:
 first
 `pod 'PPGetAddressBook' `
+
 then
 `pod install或pod install --no-repo-update`
 ##Usage 使用方法
@@ -28,19 +29,26 @@ then
 ###1.获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理),一句话搞定!
 
 ```objc
+    //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
     [PPGetAddressBook getAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
         //装着所有联系人的字典
         self.contactPeopleDict = addressBookDict;
         //联系人分组按拼音分组的Key值
         self.keys = peopleNameKey;
+    } authorizationFailure:^{
+        //授权失败的回调
+        NSLog(@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录");
     }];
 ```
 ###2.获取原始顺序的联系人模型,未分组,一句话搞定!
 
 ```objc
-    self.dataSource = [NSMutableArray array];
+    //获取没有经过排序的联系人模型
     [PPAddressBookHandle getAddressBookDataSource:^(PPPersonModel *model) {
-        [self.dataSource addObject:model];
+        [_dataSource addObject:model];
+    } authorizationFailure:^{
+        //授权失败的回调
+        NSLog(@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录");
     }];
 ```
 
