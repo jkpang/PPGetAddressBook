@@ -42,14 +42,12 @@
     // 4.从通信录对象中,将所有的联系人拷贝出来
     CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeople(addressBook);
     
-    // 5.遍历所有的联系人(每个联系人都是一条记录)
-    CFIndex peopleCount = CFArrayGetCount(allPeopleArray);
-    
-    for (CFIndex i = 0; i < peopleCount; i++) {
-        
+    // 5.遍历每个联系人的信息,并装入模型
+    for(id personInfo in (__bridge NSArray *)allPeopleArray)
+    {
         PPPersonModel *model = [PPPersonModel new];
         // 5.1获取到联系人
-        ABRecordRef person = CFArrayGetValueAtIndex(allPeopleArray, i);
+        ABRecordRef person = (__bridge ABRecordRef)(personInfo);
         // 5.2获取姓名
         NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
         NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
@@ -73,13 +71,12 @@
             [model.mobile addObject: mobile ? mobile : @"空号"];
             
         }
-        CFRelease(phones);
-        
         // 5.5将联系人模型回调出去
         personModel(model);
+        
+        CFRelease(phones);
     }
 
-    
     // 释放不再使用的对象
     CFRelease(allPeopleArray);
     CFRelease(addressBook);

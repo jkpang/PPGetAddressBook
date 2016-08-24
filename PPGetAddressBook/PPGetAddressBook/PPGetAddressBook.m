@@ -11,7 +11,6 @@
 #define END NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
 @implementation PPGetAddressBook
 
-
 + (void)requestAddressBookAuthorization
 {
     if(IOS9_LATER)
