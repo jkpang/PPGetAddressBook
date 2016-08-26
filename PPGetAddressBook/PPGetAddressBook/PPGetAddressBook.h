@@ -27,6 +27,8 @@ typedef void(^AddressBookDictBlock)(NSDictionary<NSString *,NSArray *> *addressB
 
 @interface PPGetAddressBook : NSObject
 
+@interface PPGetAddressBook : NSObject
+
 /**
  *  请求用户是否授权APP访问通讯录的权限,建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用
  */
