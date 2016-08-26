@@ -12,6 +12,7 @@
 
 + (void)getAddressBookDataSource:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
+    
     if(IOS9_LATER)
     {
         [self getDataSourceFrom_IOS9_Later:personModel authorizationFailure:failure];
@@ -20,7 +21,7 @@
     {
         [self getDataSourceFrom_IOS9_Ago:personModel authorizationFailure:failure];
     }
-
+    
 }
 
 #pragma mark - IOS9之前获取通讯录的方法
@@ -50,9 +51,10 @@
         ABRecordRef person = (__bridge ABRecordRef)(personInfo);
         // 5.2获取姓名
         NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+        NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
         NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
         
-        NSString *name = [NSString stringWithFormat:@"%@%@",lastName?lastName:@"",firstName?firstName:@""];
+        NSString *name = [NSString stringWithFormat:@"%@%@%@",lastName?lastName:@"",middleName?middleName:@"",firstName?firstName:@""];
         model.name = name.length > 0 ? name : @"无名氏" ;
         
         // 5.3获取头像数据
@@ -102,7 +104,7 @@
     
     // 3.2.创建联系人的请求对象
     // keys决定能获取联系人哪些信息,例:姓名,电话,头像等
-    NSArray *fetchKeys = @[CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey];
+    NSArray *fetchKeys = @[CNContactGivenNameKey, CNContactFamilyNameKey, CNContactMiddleNameKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey];
     CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:fetchKeys];
     
     // 3.3.请求联系人
@@ -111,11 +113,12 @@
         
         // 姓名
         NSString *lastName = contact.familyName;
+        NSString *middleName = contact.middleName;
         NSString *firstName = contact.givenName;
         
         // 创建联系人模型
         PPPersonModel *model = [PPPersonModel new];
-        NSString *name = [NSString stringWithFormat:@"%@%@",lastName?lastName:@"",firstName?firstName:@""];
+        NSString *name = [NSString stringWithFormat:@"%@%@%@",lastName?lastName:@"",middleName?middleName:@"",firstName?firstName:@""];
         model.name = name.length > 0 ? name : @"无名氏" ;
         
         // 联系人头像
