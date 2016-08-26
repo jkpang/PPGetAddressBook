@@ -8,6 +8,8 @@
 
 #import "AddressBookController1.h"
 #import "PPGetAddressBook.h"
+#define START NSDate *startTime = [NSDate date]
+#define END NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
 
 @interface AddressBookController1 ()
 
@@ -23,15 +25,16 @@
     
     self.navigationItem.title = @"A~Z顺序排列";
     
+    START;
     //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
-    [PPGetAddressBook getAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
+    [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
         //装着所有联系人的字典
         self.contactPeopleDict = addressBookDict;
         //联系人分组按拼音分组的Key值
         self.keys = peopleNameKey;
         
+        [self.tableView reloadData];
     } authorizationFailure:^{
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录"
                                                        delegate:nil
@@ -39,7 +42,8 @@
                                               otherButtonTitles:nil];
         [alert show];
     }];
-
+    
+    END;
     self.tableView.rowHeight = 60;
 }
 

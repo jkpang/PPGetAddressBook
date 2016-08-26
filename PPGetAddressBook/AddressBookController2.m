@@ -7,11 +7,11 @@
 //
 
 #import "AddressBookController2.h"
-#import "PPAddressBookHandle.h"
+#import "PPGetAddressBook.h"
 
 @interface AddressBookController2 ()<UIAlertViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, copy) NSArray *dataSource;
 
 @end
 
@@ -25,9 +25,10 @@
     _dataSource = [NSMutableArray array];
     
     //获取没有经过排序的联系人模型
-    [PPAddressBookHandle getAddressBookDataSource:^(PPPersonModel *model) {
+    [PPGetAddressBook getOriginalAddressBook:^(NSArray<PPPersonModel *> *addressBookArray) {
         
-        [_dataSource addObject:model];
+        _dataSource = addressBookArray;
+        [self.tableView reloadData];
         
     } authorizationFailure:^{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
