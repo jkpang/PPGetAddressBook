@@ -25,7 +25,6 @@
     
     self.navigationItem.title = @"A~Z顺序排列";
     
-    START;
     //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
     [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
         //装着所有联系人的字典
@@ -43,7 +42,6 @@
         [alert show];
     }];
     
-    END;
     self.tableView.rowHeight = 60;
 }
 
