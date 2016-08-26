@@ -5,7 +5,7 @@
 * 支持获取原始顺序的联系人,未分组,可自行处理.
 * 已对号码中的"+86","-","()",空号和联系人姓名空白做了处理,不会出现因为数据源NULL导致程序crash的问题.
 
-[codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
+[简书地址](http://www.jianshu.com/p/b51a6125bcff) ; [codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
 
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
 ##Installation 安装
