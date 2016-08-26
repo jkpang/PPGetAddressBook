@@ -29,34 +29,38 @@ then
 ###1.获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理),一句话搞定!
 
 ```objc
-    //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
-    [PPGetAddressBook getAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
-        //装着所有联系人的字典
-        self.contactPeopleDict = addressBookDict;
-        //联系人分组按拼音分组的Key值
-        self.keys = peopleNameKey;
+//获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
+    [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
+        //addressBookDict:装着所有联系人的字典
+        //peopleNameKey:联系人分组按拼音分组的Key值;
+        //刷新 tableView       
+        [self.tableView reloadData];
     } authorizationFailure:^{
-        //授权失败的回调
         NSLog(@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录");
     }];
+
+   
 ```
 ###2.获取原始顺序的联系人模型,未分组,一句话搞定!
 
 ```objc
-    //获取没有经过排序的联系人模型
-    [PPAddressBookHandle getAddressBookDataSource:^(PPPersonModel *model) {
-        [_dataSource addObject:model];
+//获取没有经过排序的联系人模型
+    [PPGetAddressBook getOriginalAddressBook:^(NSArray<PPPersonModel *> *addressBookArray) {
+       //addressBookArray:原始顺序的联系人数组
+       
+       //刷新 tableView       
+        [self.tableView reloadData];
     } authorizationFailure:^{
-        //授权失败的回调
-        NSLog(@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录");
+       NSLog(@"请在iPhone的“设置-隐私-通讯录”选项中，允许PPAddressBook访问您的通讯录");
     }];
+    
 ```
 
 此封装里面还有些不太完美的地方,如果你有更好的实现方法,希望不吝赐教!
 ##CocoaPods更新日志
-2016.08.26(tag:0.2.0)--将联系人排序的耗时操作放在子线程,大大优化程序的载入速度与体验
-2016.08.23(tag:0.1.2)--小细节优化
-2016.08.21(tag:0.1.1)--初始化
+* 2016.08.26(tag:0.2.0)--将联系人排序的耗时操作放在子线程,大大优化程序的载入速度与体验
+* 2016.08.23(tag:0.1.2)--小细节优化
+* 2016.08.21(tag:0.1.1)--初始化
 
 ##联系方式:
 * Weibo : @CoderPang
