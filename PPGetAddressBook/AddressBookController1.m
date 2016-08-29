@@ -23,10 +23,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     self.navigationItem.title = @"A~Z顺序排列";
+    
+    self.tableView.tableFooterView = [UIView new];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicator.frame = CGRectMake(0, 0, 80, 80);
+    indicator.center = CGPointMake([UIScreen mainScreen].bounds.size.width*0.5, [UIScreen mainScreen].bounds.size.height*0.5-80);
+    indicator.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.700];
+    indicator.clipsToBounds = YES;
+    indicator.layer.cornerRadius = 6;
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     
     //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
     [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
+        
+        [indicator stopAnimating];
+        
         //装着所有联系人的字典
         self.contactPeopleDict = addressBookDict;
         //联系人分组按拼音分组的Key值

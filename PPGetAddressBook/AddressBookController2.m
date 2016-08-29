@@ -22,10 +22,19 @@
     
     self.navigationItem.title = @"原始顺序";
     
-    _dataSource = [NSMutableArray array];
+    self.tableView.tableFooterView = [UIView new];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicator.frame = CGRectMake(0, 0, 80, 80);
+    indicator.center = CGPointMake([UIScreen mainScreen].bounds.size.width*0.5, [UIScreen mainScreen].bounds.size.height*0.5-80);
+    indicator.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.700];
+    indicator.clipsToBounds = YES;
+    indicator.layer.cornerRadius = 6;
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     
     //获取没有经过排序的联系人模型
     [PPGetAddressBook getOriginalAddressBook:^(NSArray<PPPersonModel *> *addressBookArray) {
+        [indicator stopAnimating];
         
         _dataSource = addressBookArray;
         [self.tableView reloadData];
@@ -46,7 +55,7 @@
 #pragma mark - TableViewDatasouce/TableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     return _dataSource.count;
 }
 
@@ -59,7 +68,6 @@
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    
     PPPersonModel *people = _dataSource[indexPath.row];
     cell.imageView.image = people.headerImage ? people.headerImage : [UIImage imageNamed:@"defult"];
     cell.imageView.layer.cornerRadius = 60/2;
