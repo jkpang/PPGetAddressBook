@@ -21,7 +21,7 @@
     {
         [self getDataSourceFrom_IOS9_Ago:personModel authorizationFailure:failure];
     }
-    
+
 }
 
 #pragma mark - IOS9之前获取通讯录的方法
@@ -33,7 +33,9 @@
     // 2.如果没有授权,先执行授权失败的block后return
     if (status != kABAuthorizationStatusAuthorized/** 已经授权*/)
     {
-        failure ? failure() : nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            failure ? failure() : nil;
+        });
         return;
     }
     
@@ -94,10 +96,11 @@
     // 2.如果没有授权,先执行授权失败的block后return
     if (status != CNAuthorizationStatusAuthorized)
     {
-        failure ? failure() : nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            failure ? failure() : nil;
+        });
         return;
     };
-    
     // 3.获取联系人
     // 3.1.创建联系人仓库
     CNContactStore *store = [[CNContactStore alloc] init];
