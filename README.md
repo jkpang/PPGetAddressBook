@@ -8,6 +8,11 @@
 [简书地址](http://www.jianshu.com/p/b51a6125bcff) ; [codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
 
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
+
+##Requirements 要求
+* iOS7+
+* Xcode 7+
+
 ##Installation 安装
 ###1.手动安装:
 `下载DEMO后,将子文件夹PPGetAddressBook拖入到项目中, 导入头文件PPGetAddressBook.h开始使用`
