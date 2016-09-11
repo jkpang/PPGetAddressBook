@@ -67,7 +67,10 @@
             [array addObject:model];
             
         } authorizationFailure:^{
-            failure ? failure() : nil;
+            //将授权失败的信息回调到主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure ? failure() : nil;
+            });
         }];
         
         // 将联系人数组回调到主线程
@@ -109,7 +112,10 @@
             }
             
         } authorizationFailure:^{
-            failure ? failure() : nil;
+            //将授权失败的信息回调到主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure ? failure() : nil;
+            });
         }];
         //***************** 这是一段耗时操作 **********************//
         
