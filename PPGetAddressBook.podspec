@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "https://github.com/jkpang/PPGetAddressBook.git", :tag => "0.2.1" }
+  s.source       = { :git => "https://github.com/jkpang/PPGetAddressBook.git", :tag => s.version.to_s }
 
   s.source_files  = "PPGetAddressBook/PPGetAddressBook/*.{h,m}"
 
