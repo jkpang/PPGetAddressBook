@@ -1,8 +1,8 @@
 # PPGetAddressBook
 * PPGetAddressBook对AddressBook框架(iOS9之前)和Contacts框架(iOS9之后)做了对应的封装处理;
 
-* 支持获取按联系人姓名首字拼音A~Z排序(*重点:已经对姓名的第二个字做了处理,排序更准确!*);
-* 支持获取原始顺序的联系人,未分组,可自行处理.
+* 支持一句代码获取按联系人姓名首字拼音A~Z排序(*重点:已处理姓名所有字符的排序问题,排序更准确!*);
+* 支持一句代码获取原始顺序的联系人,未分组,可自行处理.
 * 已对号码中的"+86","-","()",空号和联系人姓名空白做了处理,不会出现因为数据源NULL导致程序crash的问题.
 
 [简书地址](http://www.jianshu.com/p/b51a6125bcff) ; [codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
@@ -10,7 +10,7 @@
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
 
 ##Requirements 要求
-* iOS7+
+* iOS 7+
 * Xcode 7+
 
 ##Installation 安装
@@ -18,10 +18,11 @@
 `下载DEMO后,将子文件夹PPGetAddressBook拖入到项目中, 导入头文件PPGetAddressBook.h开始使用`
 ###2.CocoaPods安装:
 first
-`pod 'PPGetAddressBook', '~> 0.2.1'`
-
+`pod 'PPGetAddressBook', '~> 0.2.2'`
 then
 `pod install或pod install --no-repo-update`
+
+如果发现pod search PPNetworkHelper 不是最新版本，在终端执行pod setup命令更新本地spec镜像缓存(时间可能有点长),重新搜索就OK了
 ##Usage 使用方法
 
 ###一、首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
@@ -61,14 +62,15 @@ then
     
 ```
 
-此封装里面还有些不太完美的地方,如果你有更好的实现方法,希望不吝赐教!
+如果你有更好的实现方法,希望不吝赐教!
 ####你的star是我持续更新的动力!
 ===
 ##CocoaPods更新日志
+* 2016.09.12(tag:0.2.2)--小细节优化
 * 2016.09.01(tag:0.2.1)--修复 当用户没有授权时程序卡死的Bug
 * 2016.08.26(tag:0.2.0)--将联系人排序的耗时操作放在子线程,大大优化程序的载入速度与体验
 * 2016.08.23(tag:0.1.2)--小细节优化
-* 2016.08.21(tag:0.1.1)--初始化
+* 2016.08.21(tag:0.1.1)--Pods初始化
 
 ##联系方式:
 * Weibo : @CoderPang
