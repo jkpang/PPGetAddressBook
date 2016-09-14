@@ -22,7 +22,7 @@ first
 then
 `pod install或pod install --no-repo-update`
 
-如果发现pod search PPNetworkHelper 不是最新版本，在终端执行pod setup命令更新本地spec镜像缓存(时间可能有点长),重新搜索就OK了
+如果发现pod search PPGetAddressBook 不是最新版本，在终端执行pod setup命令更新本地spec镜像缓存(时间可能有点长),重新搜索就OK了
 ##Usage 使用方法
 
 ###一、首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
@@ -35,7 +35,7 @@ then
 ###1.获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理),一句话搞定!
 
 ```objc
-//获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
+    //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
     [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
         //addressBookDict:装着所有联系人的字典
         //peopleNameKey:联系人分组按拼音分组的Key值;
@@ -50,7 +50,7 @@ then
 ###2.获取原始顺序的联系人模型,未分组,一句话搞定!
 
 ```objc
-//获取没有经过排序的联系人模型
+    //获取没有经过排序的联系人模型
     [PPGetAddressBook getOriginalAddressBook:^(NSArray<PPPersonModel *> *addressBookArray) {
        //addressBookArray:原始顺序的联系人数组
        
