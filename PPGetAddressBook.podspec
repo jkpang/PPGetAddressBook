@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PPGetAddressBook"
-  s.version      = "0.2.2"
+  s.version      = "0.2.5"
   s.summary      = "一行代码获取通讯录联系人,并进行A~Z精准排序"
 
   s.homepage     = "https://github.com/jkpang/PPGetAddressBook.git"
