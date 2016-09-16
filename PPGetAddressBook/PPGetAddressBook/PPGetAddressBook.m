@@ -91,7 +91,6 @@
     dispatch_async(queue, ^{
         
         NSMutableDictionary *addressBookDict = [NSMutableDictionary dictionary];
-        //***************** 这是一段耗时操作 **********************//
         [PPAddressBookHandle getAddressBookDataSource:^(PPPersonModel *model) {
             
             //获取到姓名的大写首字母
@@ -117,19 +116,6 @@
                 failure ? failure() : nil;
             });
         }];
-        //***************** 这是一段耗时操作 **********************//
-        
-        
-        // 重新对所有大写字母Key值里面对应的的联系人数组进行排序
-        //1.遍历联系人字典中所有的元素,利用到多核cpu的优势,参考:http://blog.sunnyxx.com/2014/04/30/ios_iterator/
-        [addressBookDict enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull key, NSMutableArray * _Nonnull keyPeopleArray, BOOL * _Nonnull stop) {
-            //2.对每个Key值对应的数组里的元素来排序
-            [keyPeopleArray sortUsingComparator:^NSComparisonResult(PPPersonModel*  _Nonnull obj1, PPPersonModel  *_Nonnull obj2) {
-                
-                return [obj1.name localizedCompare:obj2.name];
-            }];
-            
-        }];
         
         // 将addressBookDict字典中的所有Key值进行排序: A~Z
         NSArray *peopleNameKey = [[addressBookDict allKeys] sortedArrayUsingSelector:@selector(compare:)];
@@ -147,19 +133,27 @@
 #pragma mark - 获取联系人姓名首字母(传入汉字字符串, 返回大写拼音首字母)
 + (NSString *)getFirstLetterFromString:(NSString *)aString
 {
-    NSMutableString *str = [NSMutableString stringWithString:aString];
-    //带声调的拼音
-    CFStringTransform((CFMutableStringRef)str,NULL, kCFStringTransformMandarinLatin,NO);
-    //不带声调的拼音
-    CFStringTransform((CFMutableStringRef)str,NULL, kCFStringTransformStripDiacritics,NO);
-    //转化为大写拼音
-    NSString *strPinYin = [str capitalizedString];
+    /**
+     * **************************************** START ***************************************
+     * 之前PPGetAddressBook对联系人排序时在中文转拼音这一部分非常耗时
+     * 参考博主-庞海礁先生的一文:iOS开发中如何更快的实现汉字转拼音 http://www.olinone.com/?p=131
+     * 使PPGetAddressBook对联系人排序的性能提升 3~6倍, 非常感谢!
+     */
+    NSMutableString *mutableString = [NSMutableString stringWithString:aString];
+    CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformToLatin, false);
+    NSString *pinyinString = [mutableString stringByFoldingWithOptions:NSDiacriticInsensitiveSearch locale:[NSLocale currentLocale]];
+    /**
+     *  *************************************** END ******************************************
+     */
+    
+    NSString *strPinYin = [pinyinString capitalizedString];
     NSString *firstString = [strPinYin substringToIndex:1];
     //判断姓名首位是否为大写字母
     NSString * regexA = @"^[A-Z]$";
     NSPredicate *predA = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexA];
     //获取并返回首字母
     return [predA evaluateWithObject:firstString] ? firstString : @"#";
+
 }
 
 

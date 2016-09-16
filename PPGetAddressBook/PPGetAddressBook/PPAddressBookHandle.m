@@ -21,7 +21,7 @@
     {
         [self getDataSourceFrom_IOS9_Ago:personModel authorizationFailure:failure];
     }
-
+    
 }
 
 #pragma mark - IOS9之前获取通讯录的方法
@@ -39,21 +39,20 @@
     // 3.创建通信录对象
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
-    // 4.从通信录对象中,将所有的联系人拷贝出来
-    CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    //4.按照排序规则从通信录对象中请求所有的联系人,并按姓名属性中的姓(LastName)来排序
+    ABRecordRef recordRef = ABAddressBookCopyDefaultSource(addressBook);
+    CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, recordRef, kABPersonSortByLastName);
     
     // 5.遍历每个联系人的信息,并装入模型
     for(id personInfo in (__bridge NSArray *)allPeopleArray)
     {
         PPPersonModel *model = [PPPersonModel new];
+        
         // 5.1获取到联系人
         ABRecordRef person = (__bridge ABRecordRef)(personInfo);
-        // 5.2获取姓名
-        NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-        NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-        NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
         
-        NSString *name = [NSString stringWithFormat:@"%@%@%@",lastName?lastName:@"",middleName?middleName:@"",firstName?firstName:@""];
+        // 5.2获取全名
+        NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(person);
         model.name = name.length > 0 ? name : @"无名氏" ;
         
         // 5.3获取头像数据
@@ -66,7 +65,8 @@
         CFIndex phoneCount = ABMultiValueGetCount(phones);
         for (CFIndex i = 0; i < phoneCount; i++)
         {
-            NSString *phoneValue = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, i);           //号码
+            // 号码
+            NSString *phoneValue = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, i);
             NSString *mobile = [self removeSpecialSubString:phoneValue];
             
             [model.mobile addObject: mobile ? mobile : @"空号"];
@@ -77,11 +77,11 @@
         
         CFRelease(phones);
     }
-
+    
     // 释放不再使用的对象
     CFRelease(allPeopleArray);
     CFRelease(addressBook);
-
+    
 }
 
 #pragma mark - IOS9之后获取通讯录的方法
@@ -102,21 +102,17 @@
     
     // 3.2.创建联系人的请求对象
     // keys决定能获取联系人哪些信息,例:姓名,电话,头像等
-    NSArray *fetchKeys = @[CNContactGivenNameKey, CNContactFamilyNameKey, CNContactMiddleNameKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey];
+    NSArray *fetchKeys = @[[CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName],CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey];
     CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:fetchKeys];
     
     // 3.3.请求联系人
-    NSError *error = nil;
-    [store enumerateContactsWithFetchRequest:request error:&error usingBlock:^(CNContact * _Nonnull contact,BOOL * _Nonnull stop) {
+    [store enumerateContactsWithFetchRequest:request error:nil usingBlock:^(CNContact * _Nonnull contact,BOOL * _Nonnull stop) {
         
-        // 姓名
-        NSString *lastName = contact.familyName;
-        NSString *middleName = contact.middleName;
-        NSString *firstName = contact.givenName;
+        // 获取联系人全名
+        NSString *name = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
         
         // 创建联系人模型
         PPPersonModel *model = [PPPersonModel new];
-        NSString *name = [NSString stringWithFormat:@"%@%@%@",lastName?lastName:@"",middleName?middleName:@"",firstName?firstName:@""];
         model.name = name.length > 0 ? name : @"无名氏" ;
         
         // 联系人头像
@@ -136,7 +132,7 @@
         personModel(model);
     }];
 #endif
-
+    
 }
 
 //过滤指定字符串(可自定义添加自己过滤的字符串)

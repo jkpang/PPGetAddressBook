@@ -18,7 +18,7 @@
 `下载DEMO后,将子文件夹PPGetAddressBook拖入到项目中, 导入头文件PPGetAddressBook.h开始使用`
 ###2.CocoaPods安装:
 first
-`pod 'PPGetAddressBook', '~> 0.2.2'`
+`pod 'PPGetAddressBook'`
 then
 `pod install或pod install --no-repo-update`
 
@@ -66,6 +66,7 @@ then
 ####你的star是我持续更新的动力!
 ===
 ##CocoaPods更新日志
+* 2016.09.16(tag:0.2.5)--读取排序通讯录时性能提升3~6倍以及部分代码优化,推荐使用此版本及之后的版本
 * 2016.09.12(tag:0.2.2)--小细节优化
 * 2016.09.01(tag:0.2.1)--修复 当用户没有授权时程序卡死的Bug
 * 2016.08.26(tag:0.2.0)--将联系人排序的耗时操作放在子线程,大大优化程序的载入速度与体验
