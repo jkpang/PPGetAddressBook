@@ -36,6 +36,7 @@
         failure ? failure() : nil;
         return;
     }
+    
     // 3.创建通信录对象
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
@@ -53,7 +54,7 @@
         
         // 5.2获取全名
         NSString *name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(person);
-        model.name = name.length > 0 ? name : @"无名氏" ;
+        model.name = name.length > 0 ? name : @"" ;
         
         // 5.3获取头像数据
         NSData *imageData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail);
@@ -69,7 +70,7 @@
             NSString *phoneValue = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, i);
             NSString *mobile = [self removeSpecialSubString:phoneValue];
             
-            [model.mobile addObject: mobile ? mobile : @"空号"];
+            [model.mobileArray addObject: mobile ? mobile : @""];
             
         }
         // 5.5将联系人模型回调出去
@@ -113,7 +114,7 @@
         
         // 创建联系人模型
         PPPersonModel *model = [PPPersonModel new];
-        model.name = name.length > 0 ? name : @"无名氏" ;
+        model.name = name.length > 0 ? name : @"" ;
         
         // 联系人头像
         model.headerImage = [UIImage imageWithData:contact.thumbnailImageData];
@@ -125,7 +126,7 @@
         {
             CNPhoneNumber *phoneNumber = labelValue.value;
             NSString *mobile = [self removeSpecialSubString:phoneNumber.stringValue];
-            [model.mobile addObject: mobile ? mobile : @"空号"];
+            [model.mobileArray addObject: mobile ? mobile : @""];
         }
         
         //将联系人模型回调出去

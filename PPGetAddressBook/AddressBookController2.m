@@ -81,25 +81,12 @@
 {
     PPPersonModel *people = _dataSource[indexPath.row];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:people.name
-                                                    message:people.mobile.firstObject
-                                                   delegate:self
-                                          cancelButtonTitle:@"取消"
-                                          otherButtonTitles:@"打电话", nil];
+                                                    message:[NSString stringWithFormat:@"号码:%@",people.mobileArray]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"知道啦"
+                                          otherButtonTitles:nil];
     [alert show];
 }
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    UIApplication *app = [UIApplication sharedApplication];
-    if (buttonIndex == 1) {
-        [app openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", alertView.message]]];
-    }
-}
-
-
-
 
 
 

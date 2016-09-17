@@ -36,15 +36,16 @@
     [indicator startAnimating];
     [self.view addSubview:indicator];
     
+    
     //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
-    [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
+    [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *nameKeys) {
         
         [indicator stopAnimating];
         
         //装着所有联系人的字典
         self.contactPeopleDict = addressBookDict;
         //联系人分组按拼音分组的Key值
-        self.keys = peopleNameKey;
+        self.keys = nameKeys;
         
         [self.tableView reloadData];
     } authorizationFailure:^{
@@ -110,21 +111,12 @@
     PPPersonModel *people = [_contactPeopleDict[key] objectAtIndex:indexPath.row];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:people.name
-                                                    message:people.mobile.firstObject
-                                                   delegate:self
-                                          cancelButtonTitle:@"取消"
-                                          otherButtonTitles:@"打电话", nil];
+                                                    message:[NSString stringWithFormat:@"号码:%@",people.mobileArray]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"知道啦"
+                                          otherButtonTitles:nil];
     [alert show];
 }
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    UIApplication *app = [UIApplication sharedApplication];
-    if (buttonIndex == 1) {
-        [app openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", alertView.message]]];
-    }
-}
 
 @end

@@ -7,6 +7,8 @@
 
 [简书地址](http://www.jianshu.com/p/b51a6125bcff) ; [codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
 
+####如果你需要Swift版本,请戳: https://github.com/jkpang/PPGetAddressBookSwift
+
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
 
 ##Requirements 要求
@@ -32,11 +34,11 @@ then
     [PPGetAddressBook requestAddressBookAuthorization];
 ```
 ###二、获取通讯录
-###1.获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理),一句话搞定!
+###1.获取按联系人姓名首字拼音A~Z排序(已处理姓名所有字符的排序问题),一句话搞定!
 
 ```objc
     //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
-    [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *peopleNameKey) {
+    [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *nameKeys) {
         //addressBookDict:装着所有联系人的字典
         //peopleNameKey:联系人分组按拼音分组的Key值;
         //刷新 tableView       

@@ -34,10 +34,8 @@
     {
         // 1.获取授权的状态
         ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
-        
         // 2.判断授权状态,如果是未决定状态,才需要请求
         if (status == kABAuthorizationStatusNotDetermined) {
-            
             // 3.创建通讯录进行授权
             ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
             ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
@@ -57,7 +55,7 @@
 + (void)getOriginalAddressBook:(AddressBookArrayBlock)addressBookArray authorizationFailure:(AuthorizationFailure)failure
 {
     //开启一个子线程,将耗时操作放到异步串行队列
-    dispatch_queue_t queue = dispatch_queue_create("addressBookArray", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue = dispatch_queue_create("addressBook.array", DISPATCH_QUEUE_SERIAL);
     
     dispatch_async(queue, ^{
         
@@ -86,7 +84,7 @@
 {
     
     //开启一个子线程,将耗时操作放到异步串行队列
-    dispatch_queue_t queue = dispatch_queue_create("addressBookInfo", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue = dispatch_queue_create("addressBook.infoDict", DISPATCH_QUEUE_SERIAL);
     
     dispatch_async(queue, ^{
         
@@ -146,12 +144,14 @@
      *  *************************************** END ******************************************
      */
     
+    // 将拼音首字母装换成大写
     NSString *strPinYin = [pinyinString capitalizedString];
+    // 截取大写首字母
     NSString *firstString = [strPinYin substringToIndex:1];
-    //判断姓名首位是否为大写字母
+    // 判断姓名首位是否为大写字母
     NSString * regexA = @"^[A-Z]$";
     NSPredicate *predA = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexA];
-    //获取并返回首字母
+    // 获取并返回首字母
     return [predA evaluateWithObject:firstString] ? firstString : @"#";
 
 }

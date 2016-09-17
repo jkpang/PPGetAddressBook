@@ -41,7 +41,7 @@ typedef void(^AddressBookArrayBlock)(NSArray<PPPersonModel *> *addressBookArray)
  *  @param addressBookDict 装有所有联系人的字典->每个字典key对应装有多个联系人模型的数组->每个模型里面包含着用户的相关信息.
  *  @param peopleNameKey   联系人姓名的大写首字母的数组
  */
-typedef void(^AddressBookDictBlock)(NSDictionary<NSString *,NSArray *> *addressBookDict,NSArray *peopleNameKey);
+typedef void(^AddressBookDictBlock)(NSDictionary<NSString *,NSArray *> *addressBookDict,NSArray *nameKeys);
 
 
 
