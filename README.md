@@ -20,7 +20,7 @@
 `下载DEMO后,将子文件夹PPGetAddressBook拖入到项目中, 导入头文件PPGetAddressBook.h开始使用`
 ###2.CocoaPods安装:
 first
-`pod 'PPGetAddressBook'`
+`pod 'PPGetAddressBook',:git => 'https://github.com/jkpang/PPGetAddressBook.git'`
 then
 `pod install或pod install --no-repo-update`
 
