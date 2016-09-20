@@ -21,6 +21,7 @@
 ###2.CocoaPods安装:
 first
 `pod 'PPGetAddressBook',:git => 'https://github.com/jkpang/PPGetAddressBook.git'`
+
 then
 `pod install或pod install --no-repo-update`
 
@@ -39,8 +40,8 @@ then
 ```objc
     //获取按联系人姓名首字拼音A~Z排序(已经对姓名的第二个字做了处理)
     [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *nameKeys) {
-        //addressBookDict:装着所有联系人的字典
-        //peopleNameKey:联系人分组按拼音分组的Key值;
+        //addressBookDict: 装着所有联系人的字典
+        //nameKeys: A~Z拼音字母数组;
         //刷新 tableView       
         [self.tableView reloadData];
     } authorizationFailure:^{
@@ -54,7 +55,7 @@ then
 ```objc
     //获取没有经过排序的联系人模型
     [PPGetAddressBook getOriginalAddressBook:^(NSArray<PPPersonModel *> *addressBookArray) {
-       //addressBookArray:原始顺序的联系人数组
+       //addressBookArray:原始顺序的联系人模型数组
        
        //刷新 tableView       
         [self.tableView reloadData];
