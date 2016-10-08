@@ -59,6 +59,7 @@
 		22BEDC3B1D64AE0E00A72128 /* PPPersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPersonModel.h; sourceTree = "<group>"; };
 		22BEDC3C1D64AE0E00A72128 /* PPPersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPersonModel.m; sourceTree = "<group>"; };
 		22BEDC401D64AE2600A72128 /* defult.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defult.png; sourceTree = "<group>"; };
+		22EC545B1DA91A1F00485F95 /* PPSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSingleton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +157,7 @@
 		22BEDC361D64AE0E00A72128 /* PPGetAddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				22EC545B1DA91A1F00485F95 /* PPSingleton.h */,
 				22BEDC391D64AE0E00A72128 /* PPGetAddressBook.h */,
 				22BEDC3A1D64AE0E00A72128 /* PPGetAddressBook.m */,
 				22BEDC371D64AE0E00A72128 /* PPAddressBookHandle.h */,

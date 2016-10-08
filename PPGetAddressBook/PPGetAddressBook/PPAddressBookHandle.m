@@ -8,9 +8,65 @@
 
 #import "PPAddressBookHandle.h"
 
+
+@interface PPAddressBookHandle ()
+
+/** iOS9之前的通讯录对象*/
+@property (nonatomic) ABAddressBookRef addressBook;
+
+#ifdef __IPHONE_9_0
+/** iOS9之后的通讯录对象*/
+@property (nonatomic, strong) CNContactStore *contactStore;
+#endif
+
+@end
+
 @implementation PPAddressBookHandle
 
-+ (void)getAddressBookDataSource:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
+PPSingletonM(AddressBookHandle)
+
+- (void)requestAuthorizationWithSuccessBlock:(void (^)(void))success
+{
+    if(IOS9_LATER)
+    {
+#ifdef __IPHONE_9_0
+        // 1.判断是否授权成功,若授权成功直接return
+        if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) return;
+        // 2.创建通讯录
+        //CNContactStore *store = [[CNContactStore alloc] init];
+        // 3.授权
+        [self.contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted) {
+                NSLog(@"授权成功"); success();
+            }else{
+                NSLog(@"授权失败");
+            }
+        }];
+#endif
+    }
+    else
+    {
+        // 1.获取授权的状态
+        ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
+        // 2.判断授权状态,如果是未决定状态,才需要请求
+        if (status == kABAuthorizationStatusNotDetermined) {
+            // 3.创建通讯录进行授权
+            //ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+            ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+                    NSLog(@"授权成功"); success();
+                } else {
+                    NSLog(@"授权失败");
+                }
+            });
+        }
+        
+    }
+    
+}
+
+
+- (void)getAddressBookDataSource:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
     
     if(IOS9_LATER)
@@ -25,7 +81,7 @@
 }
 
 #pragma mark - IOS9之前获取通讯录的方法
-+ (void)getDataSourceFrom_IOS9_Ago:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
+- (void)getDataSourceFrom_IOS9_Ago:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
     // 1.获取授权状态
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
@@ -38,11 +94,11 @@
     }
     
     // 3.创建通信录对象
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    //self.addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
     //4.按照排序规则从通信录对象中请求所有的联系人,并按姓名属性中的姓(LastName)来排序
-    ABRecordRef recordRef = ABAddressBookCopyDefaultSource(addressBook);
-    CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, recordRef, kABPersonSortByLastName);
+    ABRecordRef recordRef = ABAddressBookCopyDefaultSource(self.addressBook);
+    CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(self.addressBook, recordRef, kABPersonSortByLastName);
     
     // 5.遍历每个联系人的信息,并装入模型
     for(id personInfo in (__bridge NSArray *)allPeopleArray)
@@ -74,19 +130,19 @@
             
         }
         // 5.5将联系人模型回调出去
-        personModel(model);
+        personModel ? personModel(model) : nil;
         
         CFRelease(phones);
     }
     
     // 释放不再使用的对象
     CFRelease(allPeopleArray);
-    CFRelease(addressBook);
+    //CFRelease(self.addressBook);
     
 }
 
 #pragma mark - IOS9之后获取通讯录的方法
-+ (void)getDataSourceFrom_IOS9_Later:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
+- (void)getDataSourceFrom_IOS9_Later:(PPPersonModelBlock)personModel authorizationFailure:(AuthorizationFailure)failure
 {
 #ifdef __IPHONE_9_0
     // 1.获取授权状态
@@ -99,7 +155,7 @@
     }
     // 3.获取联系人
     // 3.1.创建联系人仓库
-    CNContactStore *store = [[CNContactStore alloc] init];
+    //CNContactStore *store = [[CNContactStore alloc] init];
     
     // 3.2.创建联系人的请求对象
     // keys决定能获取联系人哪些信息,例:姓名,电话,头像等
@@ -107,7 +163,7 @@
     CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:fetchKeys];
     
     // 3.3.请求联系人
-    [store enumerateContactsWithFetchRequest:request error:nil usingBlock:^(CNContact * _Nonnull contact,BOOL * _Nonnull stop) {
+    [self.contactStore enumerateContactsWithFetchRequest:request error:nil usingBlock:^(CNContact * _Nonnull contact,BOOL * _Nonnull stop) {
         
         // 获取联系人全名
         NSString *name = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
@@ -130,14 +186,14 @@
         }
         
         //将联系人模型回调出去
-        personModel(model);
+        personModel ? personModel(model) : nil;
     }];
 #endif
     
 }
 
 //过滤指定字符串(可自定义添加自己过滤的字符串)
-+ (NSString *)removeSpecialSubString: (NSString *)string
+- (NSString *)removeSpecialSubString: (NSString *)string
 {
     string = [string stringByReplacingOccurrencesOfString:@"+86" withString:@""];
     string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
@@ -148,5 +204,27 @@
     
     return string;
 }
+
+#pragma mark - lazy
+
+- (ABAddressBookRef)addressBook
+{
+    if (!_addressBook)
+    {
+        _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    }
+    return _addressBook;
+}
+
+#ifdef __IPHONE_9_0
+- (CNContactStore *)contactStore
+{
+    if(!_contactStore)
+    {
+        _contactStore = [[CNContactStore alloc] init];
+    }
+    return _contactStore;
+}
+#endif
 
 @end
