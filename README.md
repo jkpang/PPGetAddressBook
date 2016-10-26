@@ -5,6 +5,8 @@
 * 支持一句代码获取原始顺序的联系人,未分组,可自行处理.
 * 已对号码中的"+86","-","()",空号和联系人姓名空白做了处理,不会出现因为数据源NULL导致程序crash的问题.
 
+###新建 PP-iOS学习交流群 : 323408051 有关于PP系列封装的问题和iOS技术可以在此群讨论
+
 [简书地址](http://www.jianshu.com/p/b51a6125bcff) ; [codeData 地址](http://www.codedata.cn/cdetail/Objective-C/Demo/1471619974294285)
 
 ####如果你需要Swift版本,请戳: https://github.com/jkpang/PPGetAddressBookSwift
@@ -80,7 +82,9 @@ then
 ##联系方式:
 * Weibo : @CoderPang
 * Email : jkpang@outlook.com
-* QQ : 2406552315
+* QQ群 : 323408051
+
+![PP-iOS学习交流群群二维码](https://github.com/jkpang/PPCounter/blob/master/PP-iOS%E5%AD%A6%E4%B9%A0%E4%BA%A4%E6%B5%81%E7%BE%A4%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
 ##许可证
 PPGetAddressBook 使用 MIT 许可证，详情见 LICENSE 文件。
