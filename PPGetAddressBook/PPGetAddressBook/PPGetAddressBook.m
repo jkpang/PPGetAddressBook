@@ -147,11 +147,11 @@
  */
 + (NSString *)polyphoneStringHandle:(NSString *)aString pinyinString:(NSString *)pinyinString
 {
-    if ([aString hasPrefix:@"长"]) { pinyinString = @"chang"; return pinyinString;}
-    if ([aString hasPrefix:@"沈"]) { pinyinString = @"shen"; return pinyinString;}
-    if ([aString hasPrefix:@"厦"]) { pinyinString = @"xia"; return pinyinString;}
-    if ([aString hasPrefix:@"地"]) { pinyinString = @"di"; return pinyinString;}
-    if ([aString hasPrefix:@"重"]) { pinyinString = @"chong"; return pinyinString;}
+    if ([aString hasPrefix:@"长"]) { return @"chang";}
+    if ([aString hasPrefix:@"沈"]) { return @"shen"; }
+    if ([aString hasPrefix:@"厦"]) { return @"xia";  }
+    if ([aString hasPrefix:@"地"]) { return @"di";   }
+    if ([aString hasPrefix:@"重"]) { return @"chong";}
     return pinyinString;
 }
 
