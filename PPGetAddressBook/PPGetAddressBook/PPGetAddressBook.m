@@ -91,6 +91,19 @@
         // 将addressBookDict字典中的所有Key值进行排序: A~Z
         NSArray *nameKeys = [[addressBookDict allKeys] sortedArrayUsingSelector:@selector(compare:)];
         
+        // 将 "#" 排列在 A~Z 的后面
+        if ([nameKeys.firstObject isEqualToString:@"#"])
+        {
+            NSMutableArray *mutableNamekeys = [NSMutableArray arrayWithArray:nameKeys];
+            [mutableNamekeys insertObject:nameKeys.firstObject atIndex:nameKeys.count];
+            [mutableNamekeys removeObjectAtIndex:0];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                addressBookInfo ? addressBookInfo(addressBookDict,mutableNamekeys) : nil;
+            });
+            return;
+        }
+        
         // 将排序好的通讯录数据回调到主线程
         dispatch_async(dispatch_get_main_queue(), ^{
             addressBookInfo ? addressBookInfo(addressBookDict,nameKeys) : nil;
@@ -118,7 +131,7 @@
      */
     
     // 将拼音首字母装换成大写
-    NSString *strPinYin = [pinyinString capitalizedString];
+    NSString *strPinYin = [[self polyphoneStringHandle:aString pinyinString:pinyinString] uppercaseString];
     // 截取大写首字母
     NSString *firstString = [strPinYin substringToIndex:1];
     // 判断姓名首位是否为大写字母
@@ -129,5 +142,17 @@
     
 }
 
+/**
+ 多音字处理
+ */
++ (NSString *)polyphoneStringHandle:(NSString *)aString pinyinString:(NSString *)pinyinString
+{
+    if ([aString hasPrefix:@"长"]) { pinyinString = @"chang"; return pinyinString;}
+    if ([aString hasPrefix:@"沈"]) { pinyinString = @"shen"; return pinyinString;}
+    if ([aString hasPrefix:@"厦"]) { pinyinString = @"xia"; return pinyinString;}
+    if ([aString hasPrefix:@"地"]) { pinyinString = @"di"; return pinyinString;}
+    if ([aString hasPrefix:@"重"]) { pinyinString = @"chong"; return pinyinString;}
+    return pinyinString;
+}
 
 @end
