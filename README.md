@@ -1,4 +1,6 @@
 # PPGetAddressBook
+![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C-orange.svg)  ![](https://img.shields.io/badge/pod-v0.2.7-blue.svg) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  ![](https://img.shields.io/badge/weibo-%40CoderPang-yellow.svg)
+
 * PPGetAddressBook对AddressBook框架(iOS9之前)和Contacts框架(iOS9之后)做了对应的封装处理;
 
 * 支持一句代码获取按联系人姓名首字拼音A~Z排序(*重点:已处理姓名所有字符的排序问题,排序更准确!*);
