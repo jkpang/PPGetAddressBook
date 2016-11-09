@@ -1,4 +1,5 @@
-# PPGetAddressBook
+![image](https://github.com/jkpang/PPGetAddressBook/blob/master/Picture/PPGetAddressBook.png)
+
 ![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C-orange.svg)  ![](https://img.shields.io/badge/pod-v0.2.7-blue.svg) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-%40CoderPang-yellow.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
 
 * PPGetAddressBook对AddressBook框架(iOS9之前)和Contacts框架(iOS9之后)做了对应的封装处理;
@@ -14,7 +15,7 @@
 
 ####如果你需要Swift版本,请戳: https://github.com/jkpang/PPGetAddressBookSwift
 
-![image](https://github.com/jkpang/PPGetAddressBook/blob/master/AddressBook.mov.gif)
+![image](https://github.com/jkpang/PPGetAddressBook/blob/master/Picture/AddressBook.mov.gif)
 
 ##Requirements 要求
 * iOS 7+
@@ -32,7 +33,8 @@ then
 
 如果发现pod search PPGetAddressBook 不是最新版本，在终端执行pod setup命令更新本地spec镜像缓存(时间可能有点长),重新搜索就OK了
 ##Usage 使用方法
-
+****注意, 在iOS 10系统下必须在info.plist文件中配置获取隐私数据权限声明 : [兼容iOS 10：配置获取隐私数据权限声明
+](http://www.jianshu.com/p/616240463a7a)***
 ###一、首先必须要请求用户是否授权APP访问通讯录的权限(建议在APPDeletegate.m中的didFinishLaunchingWithOptions方法中调用)
 
 ```objc
