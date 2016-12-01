@@ -11,9 +11,6 @@
 
 @interface PPAddressBookHandle ()
 
-/** iOS9之前的通讯录对象*/
-@property (nonatomic) ABAddressBookRef addressBook;
-
 #ifdef __IPHONE_9_0
 /** iOS9之后的通讯录对象*/
 @property (nonatomic, strong) CNContactStore *contactStore;
@@ -51,13 +48,14 @@ PPSingletonM(AddressBookHandle)
         // 2.判断授权状态,如果是未决定状态,才需要请求
         if (status == kABAuthorizationStatusNotDetermined) {
             // 3.创建通讯录进行授权
-            //ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-            ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error) {
+            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
                 if (granted) {
                     NSLog(@"授权成功"); success();
                 } else {
                     NSLog(@"授权失败");
                 }
+                
             });
         }
         
@@ -94,11 +92,11 @@ PPSingletonM(AddressBookHandle)
     }
     
     // 3.创建通信录对象
-    //self.addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
     //4.按照排序规则从通信录对象中请求所有的联系人,并按姓名属性中的姓(LastName)来排序
-    ABRecordRef recordRef = ABAddressBookCopyDefaultSource(self.addressBook);
-    CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(self.addressBook, recordRef, kABPersonSortByLastName);
+    ABRecordRef recordRef = ABAddressBookCopyDefaultSource(addressBook);
+    CFArrayRef allPeopleArray = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, recordRef, kABPersonSortByLastName);
     
     // 5.遍历每个联系人的信息,并装入模型
     for(id personInfo in (__bridge NSArray *)allPeopleArray)
@@ -137,7 +135,8 @@ PPSingletonM(AddressBookHandle)
     
     // 释放不再使用的对象
     CFRelease(allPeopleArray);
-    //CFRelease(self.addressBook);
+    CFRelease(recordRef);
+    CFRelease(addressBook);
     
 }
 
@@ -206,15 +205,6 @@ PPSingletonM(AddressBookHandle)
 }
 
 #pragma mark - lazy
-
-- (ABAddressBookRef)addressBook
-{
-    if (!_addressBook)
-    {
-        _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-    }
-    return _addressBook;
-}
 
 #ifdef __IPHONE_9_0
 - (CNContactStore *)contactStore
