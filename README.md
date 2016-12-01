@@ -1,6 +1,6 @@
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/Picture/PPGetAddressBook.png)
 
-![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C-orange.svg)  ![](https://img.shields.io/badge/pod-v0.2.7-blue.svg) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-%40CoderPang-yellow.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
+![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C-orange.svg)  ![](https://img.shields.io/badge/pod-v0.2.8-blue.svg) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-%40CoderPang-yellow.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
 
 * PPGetAddressBook对AddressBook框架(iOS9之前)和Contacts框架(iOS9之后)做了对应的封装处理;
 
@@ -76,6 +76,7 @@ then
 ####你的star是我持续更新的动力!
 ===
 ##CocoaPods更新日志
+* 2016.12.01(tag:0.2.8)--修复在iOS 9之前系统中编辑联系人不会及时同步的bug
 * 2016.10.30(tag:0.2.7)--1.对姓"长","沈","厦","地","冲"多音字进行优化处理; 2.将'#'key值排列在A~Z的末尾!
 * 2016.10.08(tag:0.2.6)--读取联系人速度再次提升!
 * 2016.09.16(tag:0.2.5)--读取排序通讯录时性能提升3~6倍以及部分代码优化,推荐使用此版本及之后的版本
