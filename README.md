@@ -1,6 +1,6 @@
 ![image](https://github.com/jkpang/PPGetAddressBook/blob/master/Picture/PPGetAddressBook.png)
 
-![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C-orange.svg)  ![](https://img.shields.io/badge/pod-v0.2.8-blue.svg) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-jkpang--%E5%BA%9E-red.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
+![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C-orange.svg) ![](https://img.shields.io/cocoapods/v/PPGetAddressBook.svg?style=flat) ![](https://img.shields.io/cocoapods/dt/PPGetAddressBook.svg) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-jkpang--%E5%BA%9E-red.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
 
 * PPGetAddressBook对AddressBook框架(iOS9之前)和Contacts框架(iOS9之后)做了对应的封装处理;
 
@@ -87,7 +87,7 @@ then
 * 2016.08.21(tag:0.1.1)--Pods初始化
 
 ## 联系方式:
-* Weibo : [@jkpang-庞]((http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1))
+* Weibo : [@jkpang-庞](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
 * Email : jkpang@outlook.com
 * QQ群 : 323408051
 
