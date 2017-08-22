@@ -78,6 +78,8 @@
             {
                 //创建新发可变数组存储该首字母对应的联系人模型
                 NSMutableArray *arrGroupNames = [NSMutableArray arrayWithObject:model];
+                
+                [arrGroupNames addObject:model];
                 //将首字母-姓名数组作为key-value加入到字典中
                 [addressBookDict setObject:arrGroupNames forKey:firstLetterString];
             }
